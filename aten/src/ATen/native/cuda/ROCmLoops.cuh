@@ -234,6 +234,7 @@ __global__ void elementwise_kernel(int N, func_t f, array_t data) {
   // Assumption:
   // 1. all arguments of `f` have the same type, which could be different from the return type of `f`
   // 2. all tensors are contiguous, that is: stride == sizeof(type) for all tensors
+
   using traits = function_traits<func_t>;
   using return_t = typename traits::result_type;
   using arg_t = detail::arg_type::type<func_t>;
