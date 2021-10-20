@@ -512,6 +512,7 @@ class TestCuda(TestCase):
         # Similarly, both copy() ops are synchronized on s0.
         self.assertEqual(y, x)
 
+    @skipIfRocm
     @unittest.skipIf(not TEST_MULTIGPU, "only one GPU detected")
     def test_copy_streams(self):
         d0 = torch.device('cuda:0')
@@ -541,6 +542,7 @@ class TestCuda(TestCase):
         y = torch.ones(10000000, dtype=torch.uint8).cuda()
         _test_copy_non_blocking(x, y)
 
+    @skipIfRocm
     def test_to_non_blocking(self):
         stream = torch.cuda.current_stream()
 
@@ -562,6 +564,7 @@ class TestCuda(TestCase):
                               pin_memory=True if dst == "cuda" else False)
             _test_to_non_blocking(src, try_non_blocking, dst)
 
+    @skipIfRocm
     def test_to_cpu_blocking_by_default(self):
         src = torch.randn(1000000, device="cuda")
         torch.cuda.synchronize()
@@ -937,6 +940,7 @@ class TestCuda(TestCase):
                 torch.cuda.current_stream().device, torch.device('cuda:1'))
             self.assertNotEqual(torch.cuda.current_stream(), default_stream)
 
+    @skipIfRocm
     @unittest.skipIf(not TEST_MULTIGPU, "detected only one GPU")
     def test_streams_multi_gpu_query(self):
         d0 = torch.device('cuda:0')
@@ -1029,6 +1033,7 @@ class TestCuda(TestCase):
             self.assertEqual(torch.cuda.FloatTensor(1, device=0).get_device(), 0)
             self.assertEqual(torch.cuda.FloatTensor(1, device=None).get_device(), 1)
 
+    @skipIfRocm
     def test_events(self):
         stream = torch.cuda.current_stream()
         event = torch.cuda.Event(enable_timing=True)
@@ -1175,6 +1180,7 @@ class TestCuda(TestCase):
         self.assertTrue(s0.query())
         self.assertTrue(s1.query())
 
+    @skipIfRocm
     @unittest.skipIf(not TEST_MULTIGPU, "detected only one GPU")
     def test_events_multi_gpu_query(self):
         d0 = torch.device('cuda:0')
@@ -1291,6 +1297,7 @@ class TestCuda(TestCase):
             tmp3 = torch.cuda.FloatTensor(t.size())
             self.assertEqual(tmp3.data_ptr(), ptr[0], msg='allocation not re-used')
 
+    @skipIfRocm
     def test_record_stream_on_shifted_view(self):
         # See issue #27366
 
@@ -1362,6 +1369,7 @@ class TestCuda(TestCase):
         x = torch.arange(0, 10).view((2, 5))
         self.assertEqual(x.t(), x.t().pin_memory())
 
+    @skipIfRocm
     def test_caching_pinned_memory(self):
         cycles_per_ms = get_cycles_per_ms()
 
@@ -1381,6 +1389,7 @@ class TestCuda(TestCase):
         self.assertNotEqual(t.data_ptr(), ptr, msg='allocation re-used too soon')
         self.assertEqual(list(gpu_tensor), [1])
 
+    @skipIfRocm
     @unittest.skipIf(not TEST_MULTIGPU, "only one GPU detected")
     def test_caching_pinned_memory_multi_gpu(self):
         # checks that the events preventing pinned memory from being re-used
@@ -1731,6 +1740,7 @@ class TestCuda(TestCase):
 
         return MultiplyInStream
 
+    @skipIfRocm
     @skipCUDANonDefaultStreamIf(True)
     def test_streaming_backwards_sync(self):
         default_stream = torch.cuda.current_stream()
@@ -1865,6 +1875,7 @@ class TestCuda(TestCase):
         self.assertTrue(a.grad.sum().item() == 4 * size)
         self.assertTrue(b.grad.sum().item() == 4 * size)
 
+    @skipIfRocm
     def test_streaming_backwards_sync_graph_root(self):
         # This function tests if bwd ops running on a side stream properly sync with the GraphRoot.
         # The potential bug it targets is a race condition. The test uses multiple trials and
@@ -1910,6 +1921,7 @@ class TestCuda(TestCase):
                     self.assertEqual(a.grad, grad * b)
                     self.assertEqual(b.grad, grad * a)
 
+    @skipIfRocm
     def test_streaming_backwards_callback(self):
         # Tests if autograd callbacks sync properly with respect to leaf streams and
         # the user-facing stream surrounding backward(). If it fails, first suspect is
@@ -2647,6 +2659,7 @@ torch.cuda.synchronize()
                     self.assertEqual(results[t].sum().item(),
                                      (2048 - test_iters) * (2048 - test_iters))
 
+    @skipIfRocm
     def test_cusparse_multiple_threads_same_device(self):
         size = 1024
         num_threads = 2
