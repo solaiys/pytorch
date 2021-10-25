@@ -15,6 +15,12 @@ namespace at { namespace native {
 
 namespace {
 
+#ifdef __HIP_PLATFORM_HCC__
+static const int BLOCKDIMY = 16;
+#else
+static const int BLOCKDIMY = 32;
+#endif
+
 template
   <typename scalar_t,
    typename accscalar_t,
@@ -233,9 +239,8 @@ Tensor embedding_dense_backward_cuda(const Tensor & grad_, const Tensor & indice
     auto grad_weight = at::zeros({num_weights, grad_.size(-1)}, grad_.options());
     int64_t stride = grad_weight.stride(0);
     int warp_size = at::cuda::warp_size();
-    int block_dim_y = 1024 / warp_size;
     dim3 grid(THCCeilDiv(stride, (int64_t)warp_size));
-    dim3 block(warp_size, block_dim_y);
+    dim3 block(warp_size, BLOCKDIMY);
 
     AT_DISPATCH_FLOATING_TYPES_AND2(
       at::ScalarType::Half, at::ScalarType::BFloat16,
@@ -248,7 +253,7 @@ Tensor embedding_dense_backward_cuda(const Tensor & grad_, const Tensor & indice
           embedding_backward_feature_kernel<scalar_t, accscalar_t, index_t>
             <<<grid,
                 block,
-                sizeof(accscalar_t)*warp_size*block_dim_y + sizeof(int)*warp_size*block_dim_y,
+                sizeof(accscalar_t)*warp_size*BLOCKDIMY + sizeof(int)*warp_size*BLOCKDIMY,
                 stream>>>
             (indices_contig.data_ptr<index_t>(),
               grad.data_ptr<scalar_t>(),
@@ -307,10 +312,11 @@ Tensor & embedding_renorm_cuda_(Tensor & self, const Tensor & indices,
     );
 
     int warp_size = at::cuda::warp_size();
-    constexpr int num_threads = 128;
-    TORCH_INTERNAL_ASSERT(num_threads % warp_size == 0);
-    static_assert(num_threads <= cuda_utils::kCUDABlockReduceMaxThreads,
-                  "BlockReduceSum requires all warps be active");
+    int max_threads = warp_size * warp_size;
+    const int num_threads = warp_size * 2;
+    TORCH_INTERNAL_ASSERT(
+        num_threads % warp_size == 0 && num_threads <= max_threads,
+        "BlockReduceSum requires all warps be active");
     dim3 grid = num_unique_indices.item<int64_t>();
     dim3 block = num_threads;
     int dim = self.stride(0);
