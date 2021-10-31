@@ -1,6 +1,0 @@
-test_embedding_bag_2D_padding_idx_cuda_bfloat16 (__main__.TestNNDeviceTypeCUDA) ... skipped "test doesn't currently work on the ROCm stack"
-
-----------------------------------------------------------------------
-Ran 1 test in 3.250s
-
-OK (skipped=1)
