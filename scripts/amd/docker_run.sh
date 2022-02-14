@@ -1,1 +1,0 @@
-sudo docker run -it  --network=host -v ${PWD}:/pytorch --rm --device=/dev/kfd --device=/dev/dri -e-name=PT_IFU --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --group-add video --shm-size=4g rocm/pytorch:latest
