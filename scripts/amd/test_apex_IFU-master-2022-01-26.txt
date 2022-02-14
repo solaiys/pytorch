@@ -1,0 +1,376 @@
+test_add_param_group (test_add_param_group.TestAddParamGroup) ... ok
+test_bce_is_float_with_allow_banned (test_basic_casts.TestBannedMethods) ... ok
+test_bce_raises_by_default (test_basic_casts.TestBannedMethods) ... ok
+test_batch_norm_is_match (test_basic_casts.TestBasicCastsBFloat16) ... ok
+test_conv2d_is_bfloat16 (test_basic_casts.TestBasicCastsBFloat16) ... skipped "test doesn't currently work on ROCm stack."
+test_group_norm_is_float (test_basic_casts.TestBasicCastsBFloat16) ... ok
+test_linear_is_bfloat16 (test_basic_casts.TestBasicCastsBFloat16) ... skipped "test doesn't currently work on ROCm stack."
+test_mse_loss_is_float (test_basic_casts.TestBasicCastsBFloat16) ... ok
+test_relu_is_match (test_basic_casts.TestBasicCastsBFloat16) ... ok
+test_softmax_is_float (test_basic_casts.TestBasicCastsBFloat16) ... ok
+test_batch_norm_is_match (test_basic_casts.TestBasicCastsHalf) ... ok
+test_conv2d_is_half (test_basic_casts.TestBasicCastsHalf) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_group_norm_is_float (test_basic_casts.TestBasicCastsHalf) ... ok
+test_linear_is_half (test_basic_casts.TestBasicCastsHalf) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_mse_loss_is_float (test_basic_casts.TestBasicCastsHalf) ... ok
+test_relu_is_match (test_basic_casts.TestBasicCastsHalf) ... ok
+test_softmax_is_float (test_basic_casts.TestBasicCastsHalf) ... ok
+test_cpu_is_float (test_basic_casts.TestTensorCastsBFloat16) ... ok
+test_matmul_method_is_bfloat16 (test_basic_casts.TestTensorCastsBFloat16) ... skipped "test doesn't currently work on ROCm stack."
+test_matmul_op_is_bfloat16 (test_basic_casts.TestTensorCastsBFloat16) ... skipped "test doesn't currently work on ROCm stack."
+test_pow_method_is_float (test_basic_casts.TestTensorCastsBFloat16) ... ok
+test_pow_op_is_float (test_basic_casts.TestTensorCastsBFloat16) ... ok
+test_sum_is_float (test_basic_casts.TestTensorCastsBFloat16) ... ok
+test_cpu_is_float (test_basic_casts.TestTensorCastsHalf) ... ok
+test_matmul_method_is_half (test_basic_casts.TestTensorCastsHalf) ... ok
+test_matmul_op_is_half (test_basic_casts.TestTensorCastsHalf) ... ok
+test_pow_method_is_float (test_basic_casts.TestTensorCastsHalf) ... ok
+test_pow_op_is_float (test_basic_casts.TestTensorCastsHalf) ... ok
+test_sum_is_float (test_basic_casts.TestTensorCastsHalf) ... ok
+test_blacklist_module_bfp16_weight (test_cache.TestCache) ... ok
+test_blacklist_module_fp16_weight (test_cache.TestCache) ... ok
+test_blacklist_module_fp32_weight (test_cache.TestCache) ... ok
+test_promote_module_bfp16_weight (test_cache.TestCache) ... ok
+test_promote_module_fp16_weight (test_cache.TestCache) ... ok
+test_promote_module_fp32_weight (test_cache.TestCache) ... ok
+test_whitelist_module_bfp16_weight (test_cache.TestCache) ... ok
+test_whitelist_module_fp16_weight (test_cache.TestCache) ... ok
+test_whitelist_module_fp32_weight (test_cache.TestCache) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_loss_scale_decrease (test_checkpointing.TestCheckpointing) ... ok
+test_restoring (test_checkpointing.TestCheckpointing) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_state_dict (test_checkpointing.TestCheckpointing) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_2models2losses1optimizer (test_fused_sgd.TestMultipleModelsOptimizersLosses) ... ok
+test_2models2losses2optimizers (test_fused_sgd.TestMultipleModelsOptimizersLosses) ... ok
+test_3models2losses1optimizer (test_fused_sgd.TestMultipleModelsOptimizersLosses) ... ok
+test_3models2losses2optimizers (test_fused_sgd.TestMultipleModelsOptimizersLosses) ... ok
+test_larc_mixed_precision (test_larc.TestLARC) ... ok
+test_fuzz (test_multi_tensor_axpby.TestMultiTensorAxpby) ... ok
+test_fuzz_nhwc (test_multi_tensor_axpby.TestMultiTensorAxpby) ... ok
+test_fuzz (test_multi_tensor_l2norm.TestMultiTensorL2Norm) ... ok
+test_fuzz (test_multi_tensor_scale.TestMultiTensorScale) ... ok
+test_2models2losses1optimizer (test_multiple_models_optimizers_losses.TestMultipleModelsOptimizersLosses) ... ok
+test_2models2losses2optimizers (test_multiple_models_optimizers_losses.TestMultipleModelsOptimizersLosses) ... ok
+test_3models2losses1optimizer (test_multiple_models_optimizers_losses.TestMultipleModelsOptimizersLosses) ... ok
+test_3models2losses2optimizers (test_multiple_models_optimizers_losses.TestMultipleModelsOptimizersLosses) ... ok
+test_cat_matches_widest (test_promotion.TestPromotionBFloat16) ... ok
+test_inplace_add_matches_self (test_promotion.TestPromotionBFloat16) ... ok
+test_inplace_exp_is_error_for_bfloat16 (test_promotion.TestPromotionBFloat16) ... ok
+test_mul_matches_widest (test_promotion.TestPromotionBFloat16) ... ok
+test_atan2_matches_widest (test_promotion.TestPromotionHalf) ... ok
+test_cat_matches_widest (test_promotion.TestPromotionHalf) ... ok
+test_inplace_add_matches_self (test_promotion.TestPromotionHalf) ... ok
+test_inplace_exp_is_error_for_half (test_promotion.TestPromotionHalf) ... ok
+test_mul_matches_widest (test_promotion.TestPromotionHalf) ... ok
+test_gru_cell_is_half (test_rnn.TestRnnCells) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_lstm_cell_is_half (test_rnn.TestRnnCells) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_rnn_cell_is_half (test_rnn.TestRnnCells) ... skipped 'The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Same error is also observed on CUDA. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/62'
+test_gru_is_half (test_rnn.TestRnns) ... skipped "test doesn't currently work on ROCm stack."
+test_lstm_is_half (test_rnn.TestRnns) ... skipped "test doesn't currently work on ROCm stack."
+test_rnn_is_half (test_rnn.TestRnns) ... skipped "test doesn't currently work on ROCm stack."
+test_rnn_packed_sequence (test_rnn.TestRnns) ... skipped "test doesn't currently work on ROCm stack."
+
+----------------------------------------------------------------------
+Ran 70 tests in 114.332s
+
+OK (skipped=16)
+test_output_is_half (test_fp16util.TestFP16Model) ... ok
+test_params_and_buffers (test_fp16util.TestFP16Model) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.016s
+
+OK
+test_float (test_fused_novograd.TestFusedNovoGrad) ... ok
+test_half (test_fused_novograd.TestFusedNovoGrad) ... ok
+test_multi_device (test_fused_novograd.TestFusedNovoGrad) ... ok
+test_multi_params (test_fused_novograd.TestFusedNovoGrad) ... ok
+test_adagrad_option (test_fused_optimizer.TestFusedAdagrad) ... ok
+test_float (test_fused_optimizer.TestFusedAdagrad) ... ok
+test_half (test_fused_optimizer.TestFusedAdagrad) ... skipped 'PyTorch optimizer is not numerically correct for fp16'
+test_multi_device (test_fused_optimizer.TestFusedAdagrad) ... ok
+test_multi_params (test_fused_optimizer.TestFusedAdagrad) ... ok
+test_multi_params_different_devices_throws (test_fused_optimizer.TestFusedAdagrad) ... ok
+test_adam_option (test_fused_optimizer.TestFusedAdam) ... ok
+test_float (test_fused_optimizer.TestFusedAdam) ... ok
+test_fp16_output (test_fused_optimizer.TestFusedAdam) ... skipped 'No longer support output fp16 param'
+test_half (test_fused_optimizer.TestFusedAdam) ... skipped 'NaN issue observed on ROCm as of 12/1/2021. The failing unit test is introduced by a PyTorch commit sometime in between rocm/pytorch:rocm4.3.1_ubuntu18.04_py3.6_pytorch_1.9.0 and 2021/12/01. Please refer to https://github.com/ROCmSoftwarePlatform/apex/issues/63'
+test_multi_device (test_fused_optimizer.TestFusedAdam) ... ok
+test_multi_params (test_fused_optimizer.TestFusedAdam) ... skipped 'Disable until 8/1/2019 adam/adamw upstream picked'
+test_scale (test_fused_optimizer.TestFusedAdam) ... skipped 'No longer support fuse scaling'
+test_float (test_fused_optimizer.TestFusedSGD) ... ok
+test_half (test_fused_optimizer.TestFusedSGD) ... ok
+test_multi_device (test_fused_optimizer.TestFusedSGD) ... ok
+test_float (test_lamb.TestFusedLAMB) ... ok
+test_half (test_lamb.TestFusedLAMB) ... skipped 'PyTorch optimizer is not numerically correct for fp16'
+test_lamb_option (test_lamb.TestFusedLAMB) ... ok
+test_multi_device (test_lamb.TestFusedLAMB) ... ok
+test_multi_params (test_lamb.TestFusedLAMB) ... ok
+test_float (test_lamb.TestFusedMixedPrecisionLamb) ... ok
+test_half (test_lamb.TestFusedMixedPrecisionLamb) ... skipped 'PyTorch optimizer is not numerically correct for fp16'
+test_lamb_option (test_lamb.TestFusedMixedPrecisionLamb) ... ok
+test_multi_device (test_lamb.TestFusedMixedPrecisionLamb) ... ok
+test_multi_params (test_lamb.TestFusedMixedPrecisionLamb) ... ok
+
+----------------------------------------------------------------------
+Ran 30 tests in 2.899s
+
+OK (skipped=7)
+test_large_batch (test_fused_layer_norm.TestFusedLayerNorm) ... ok
+test_layer_norm (test_fused_layer_norm.TestFusedLayerNorm) ... ok
+test_large_batch (test_fused_layer_norm.TestFusedLayerNormElemWise) ... ok
+test_layer_norm (test_fused_layer_norm.TestFusedLayerNormElemWise) ... ok
+test_large_batch (test_fused_layer_norm.TestFusedLayerNormElemWiseBFloat16) ... skipped 'Skip to save time'
+test_layer_norm (test_fused_layer_norm.TestFusedLayerNormElemWiseBFloat16) ... ok
+test_large_batch (test_fused_layer_norm.TestFusedLayerNormElemWiseHalf) ... skipped 'Skip to save time'
+test_layer_norm (test_fused_layer_norm.TestFusedLayerNormElemWiseHalf) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.355s
+
+OK (skipped=2)
+test_creation (test_mlp.TestMLP) ... ok
+test_no_bias (test_mlp.TestMLP) ... skipped "test doesn't currently work on ROCm stack."
+test_no_grad (test_mlp.TestMLP) ... skipped "test doesn't currently work on ROCm stack."
+test_numeric (test_mlp.TestMLP) ... skipped "test doesn't currently work on ROCm stack."
+test_performance_half (test_mlp.TestMLP) ... skipped "test doesn't currently work on ROCm stack."
+test_with_bias (test_mlp.TestMLP) ... skipped "test doesn't currently work on ROCm stack."
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK (skipped=5)
+
+Executing tests from run_amp
+Warning:  unscaling grads that are not FP32. Unscaling non-fp32 grads may indicate an error. When using Amp, you don't need to call .half() on your model.
+
+Executing tests from run_fp16util
+
+Executing tests from run_optimizers
+
+Executing tests from run_fused_layer_norm
+
+Executing tests from run_mlp
+running opt_level O2
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+Selected optimization level O2:  FP16 training with FP32 batchnorm and FP32 master weights.
+
+Defaults for this optimization level are:
+enabled                    : True
+opt_level                  : O2
+cast_model_type            : torch.float16
+patch_torch_functions      : False
+patch_torch_functions_type : None
+keep_batchnorm_fp32        : True
+master_weights             : True
+loss_scale                 : dynamic
+Processing user overrides (additional kwargs that are not None)...
+After processing overrides, optimization options are:
+enabled                    : True
+opt_level                  : O2
+cast_model_type            : torch.float16
+patch_torch_functions      : False
+patch_torch_functions_type : None
+keep_batchnorm_fp32        : True
+master_weights             : True
+loss_scale                 : dynamic
+final loss =  tensor(0.4959, device='cuda:0', grad_fn=<MseLossBackward0>)
+OK:  Model and master params match across ranks.
+O2 test completed. Deleting model files
+
+Running syncbn tests
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+--- count :  --- count :  tensor([25600, 25600], device='cuda:0', dtype=torch.int32)
+tensor([25600, 25600], device='cuda:1', dtype=torch.int32)
+====SBN two gpu passed tests
+====SBN two gpu passed tests
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+--- count :  tensor([25600, 25600], device='cuda:0', dtype=torch.int32)
+--- count :  tensor([25600, 25600], device='cuda:1', dtype=torch.int32)
+====SBN two gpu passed tests
+comparing bn vs sbn bias:  False
+dif    :  [-0.04688 -0.02344]
+inp1   :  [-7.914  4.176]
+inp2   :  [-7.867  4.2  ]
+comparing bn vs sbn weight:  False
+dif    :  [0.0625]
+inp1   :  [-41.72]
+inp2   :  [-41.78]
+====SBN two gpu passed tests
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+conv wgrad check failed! False
+dif    :  [1.9192696e-05]
+inp1   :  [0.20297635]
+inp2   :  [0.20295715]
+Running syncbn python only tests
+Warning:  using Python fallback for SyncBatchNorm
+====SBN single gpu passed tests
+Running syncbn batchnorm1d tests
+running DDP tests
+/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py:178: FutureWarning: The module torch.distributed.launch is deprecated
+and will be removed in future. Use torchrun.
+Note that --use_env is set by default in torchrun.
+If your script expects `--local_rank` argument to be set, please
+change it to read from `os.environ['LOCAL_RANK']` instead. See 
+https://pytorch.org/docs/stable/distributed.html#launch-utility for 
+further instructions
+
+  warnings.warn(
+WARNING:torch.distributed.run:
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+i = 0
+i = 0
+model.a: grad.data_ptr() = 140343693541376, expected sum 16777216.0, got 16777216.0
+model.a: grad.data_ptr() = 140272692363264, expected sum 16777216.0, got 16777216.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 8388608.0, got 8388608.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 8388608.0, got 8388608.0
+rank 0 created group 0 with backend nccl
+rank 0 created group 1 with backend nccl
+rank 0 created group 2 with backend nccl
+rank 1 created group 0 with backend nccl
+rank 1 created group 1 with backend nccl
+rank 1 created group 2 with backend nccl
+i = 1
+i = 1
+model.a: grad.data_ptr() = 140272692363264, expected sum 50331648.0, got 50331648.0
+model.a: grad.data_ptr() = 140343693541376, expected sum 50331648.0, got 50331648.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 25165824.0, got 25165824.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 25165824.0, got 25165824.0
+i = 2i = 2
+
+model.a: grad.data_ptr() = 140343693541376, expected sum 83886080.0, got 83886080.0model.a: grad.data_ptr() = 140272692363264, expected sum 83886080.0, got 83886080.0
+
+model.b: grad.data_ptr() = 140278665052160, expected sum 41943040.0, got 41943040.0model.b: grad.data_ptr() = 140349666230272, expected sum 41943040.0, got 41943040.0
+
+i = 3
+i = 3
+model.a: grad.data_ptr() = 140343693541376, expected sum 117440512.0, got 117440512.0model.a: grad.data_ptr() = 140272692363264, expected sum 117440512.0, got 117440512.0
+
+model.b: grad.data_ptr() = 140349666230272, expected sum 58720256.0, got 58720256.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 58720256.0, got 58720256.0
+i = 4
+i = 4
+model.a: grad.data_ptr() = 140272692363264, expected sum 150994944.0, got 150994944.0
+model.a: grad.data_ptr() = 140343693541376, expected sum 150994944.0, got 150994944.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 75497472.0, got 75497472.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 75497472.0, got 75497472.0
+i = 5
+i = 5
+model.a: grad.data_ptr() = 140272692363264, expected sum 184549376.0, got 184549376.0
+model.a: grad.data_ptr() = 140343693541376, expected sum 184549376.0, got 184549376.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 92274688.0, got 92274688.0model.b: grad.data_ptr() = 140349666230272, expected sum 92274688.0, got 92274688.0
+
+i = 6
+i = 6
+model.a: grad.data_ptr() = 140272692363264, expected sum 218103808.0, got 218103808.0
+model.a: grad.data_ptr() = 140343693541376, expected sum 218103808.0, got 218103808.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 109051904.0, got 109051904.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 109051904.0, got 109051904.0
+i = 7
+i = 7
+model.a: grad.data_ptr() = 140343693541376, expected sum 251658240.0, got 251658240.0
+model.a: grad.data_ptr() = 140272692363264, expected sum 251658240.0, got 251658240.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 125829120.0, got 125829120.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 125829120.0, got 125829120.0
+i = 8i = 8
+
+model.a: grad.data_ptr() = 140272692363264, expected sum 285212672.0, got 285212672.0
+model.a: grad.data_ptr() = 140343693541376, expected sum 285212672.0, got 285212672.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 142606336.0, got 142606336.0model.b: grad.data_ptr() = 140278665052160, expected sum 142606336.0, got 142606336.0
+
+i = 9
+i = 9
+model.a: grad.data_ptr() = 140272692363264, expected sum 318767104.0, got 318767104.0
+model.b: grad.data_ptr() = 140278665052160, expected sum 159383552.0, got 159383552.0
+passed =  True
+model.a: grad.data_ptr() = 140343693541376, expected sum 318767104.0, got 318767104.0
+model.b: grad.data_ptr() = 140349666230272, expected sum 159383552.0, got 159383552.0
+passed =  True
+test_encdec_multihead_attn (test_encdec_multihead_attn.EncdecMultiheadAttnTest) ... ok
+test_encdec_multihead_attn_pad_mask (test_encdec_multihead_attn.EncdecMultiheadAttnTest) ... ok
+test_encdec_multihead_attn_time_mask (test_encdec_multihead_attn.EncdecMultiheadAttnTest) ... ok
+test_encdec_multihead_attn_norm_add (test_encdec_multihead_attn_norm_add.EncdecMultiheadAttnNormAddTest) ... ok
+test_self_multihead_attn_additive_mask (test_fast_self_multihead_attn_bias.SelfMultiheadAttnTest) ... ok
+test_fused_softmax (test_mha_fused_softmax.FusedSoftmaxTest) ... ok
+test_self_multihead_attn (test_self_multihead_attn.SelfMultiheadAttnTest) ... ok
+test_self_multihead_attn_pad_mask (test_self_multihead_attn.SelfMultiheadAttnTest) ... ok
+test_self_multihead_attn_time_mask (test_self_multihead_attn.SelfMultiheadAttnTest) ... ok
+test_self_multihead_attn_norm_add (test_self_multihead_attn_norm_add.SelfMultiheadAttnNormAddTest) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 11.390s
+
+OK
+test_label_smoothing_function (test_label_smoothing.LabelSmoothingTest) ... ok
+test_label_smoothing_perf (test_label_smoothing.LabelSmoothingTest) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 21.155s
+
+OK
+
+Executing tests from multihead_attn
+
+Executing tests from .
+Max atol idx: 9450903, diff: 0.000001, ref: 0.000996, tst: 0.000997
+Max atol idx: 53895248, diff: 0.000001, ref: 0.001402, tst: 0.001403
+Max atol idx: 93398304, diff: 0.000001, ref: 0.000990, tst: 0.000991
+Max atol idx: 1925267, diff: 0.000001, ref: 0.001104, tst: 0.001105
+Max atol idx: 18144511, diff: 0.000001, ref: 0.001141, tst: 0.001140
+Max atol idx: 25655409, diff: 0.000001, ref: 0.001026, tst: 0.001027
+Max atol idx: 14718719, diff: 0.000001, ref: 0.001740, tst: 0.001741
+Max atol idx: 117233792, diff: 0.000001, ref: 0.001109, tst: 0.001110
+Max atol idx: 24083395, diff: 0.000001, ref: 0.001026, tst: 0.001025
+Max atol idx: 132269169, diff: 0.000002, ref: 0.002460, tst: 0.002462
+
+Raw time 17.49 s elapsed for 1000 iterations, norm 0.6245
+Opt time 2.59 s elapsed for 1000 iterations, norm 0.6245
