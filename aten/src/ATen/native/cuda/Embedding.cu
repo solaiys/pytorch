@@ -11,7 +11,7 @@
 #include <ATen/native/cuda/EmbeddingBackwardKernel.cuh>
 #include <ATen/native/cuda/SortingCommon.cuh>
 #include <ATen/native/cuda/block_reduce.cuh>
-#include <ATen/native/cuda/Loops.cuh>
+#include <ATen/native/cuda/thread_constants.h>
 
 namespace at { namespace native {
 
