@@ -1037,7 +1037,7 @@ module_db: List[ModuleInfo] = [
                module_inputs_func=module_inputs_torch_nn_BatchNorm2d,
                skips=(
                    DecorateInfo(skipIfMps, 'TestModule', dtypes=[torch.float64]),)
-                )
+               ),
     ModuleInfo(torch.nn.BatchNorm3d,
                train_and_eval_differ=True,
                module_inputs_func=module_inputs_torch_nn_BatchNorm3d,
