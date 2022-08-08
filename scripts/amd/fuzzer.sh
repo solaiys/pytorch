@@ -1,1 +1,0 @@
-python3 scripts/amd/fuzzer.py |tee /dockerx/pytorch/fuzzer.log
