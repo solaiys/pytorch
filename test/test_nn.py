@@ -19456,7 +19456,6 @@ torch.cuda.synchronize()
         helper(1, 16, 56, 56, out_channels=16, kernel_size=3, groups=16)
 
     @onlyCUDA
-    @skipCUDAIfRocm
     @skipCUDAIfCudnnVersionLessThan(8005)
     @dtypes(torch.half, torch.float)
     def test_conv_cudnn_ndhwc(self, device, dtype):
@@ -19659,7 +19658,6 @@ torch.cuda.synchronize()
                 self.assertEqual(F.relu(conv2d_out + alpha * z), cudnn_out)
 
     @onlyCUDA
-    @skipCUDAIfRocm
     @skipCUDAIfCudnnVersionLessThan(7603)
     def test_convert_conv2d_weight_memory_format(self, device):
         input = torch.randint(1, 10, (2, 8, 4, 4), dtype=torch.float32, device=device)
