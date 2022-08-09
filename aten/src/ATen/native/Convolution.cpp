@@ -14,6 +14,7 @@
 #include <c10/macros/Macros.h>
 
 #include <limits>
+#include <iostream>
 
 #if AT_NNPACK_ENABLED()
 #include <nnpack.h>
@@ -1049,6 +1050,7 @@ ConvBackend select_conv_backend(
     const Tensor& input_r, const Tensor& weight_r, const c10::optional<Tensor>& bias_opt,
     IntArrayRef stride_, IntArrayRef padding_, IntArrayRef dilation_,
     bool transposed_, IntArrayRef output_padding_, int64_t groups_) {
+  std::cout << "select_conv_backend" << std::endl;
   c10::MaybeOwned<Tensor> bias_maybe_owned = at::borrow_from_optional_tensor(bias_opt);
   const Tensor& bias = *bias_maybe_owned;
 
@@ -1093,6 +1095,7 @@ ConvBackend select_conv_backend(
     const at::OptionalIntArrayRef bias_sizes_opt,
     const bool need_backward,
     const ConvParams& params) {
+  std::cout << "select_conv_backend" << std::endl;
 
   // don't send empty inputs through backends
   if (input.size(0) == 0 || input.size(1) == 0) {
@@ -1286,6 +1289,7 @@ at::Tensor _convolution(
     IntArrayRef stride_, IntArrayRef padding_, IntArrayRef dilation_,
     bool transposed_, IntArrayRef output_padding_, int64_t groups_,
     bool benchmark, bool deterministic, bool cudnn_enabled, bool allow_tf32) {
+  std::cout << "_convolution" << std::endl;
   // See [Note: hacky wrapper removal for optional tensor]
   c10::MaybeOwned<Tensor> bias_r_maybe_owned = at::borrow_from_optional_tensor(bias_r_opt);
   const Tensor& bias_r = *bias_r_maybe_owned;
