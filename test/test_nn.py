@@ -8421,7 +8421,6 @@ tensor(..., device='meta', size=(1,), requires_grad=True)""")
         output = rnn(input, hx)
 
     @unittest.skipIf(not TEST_CUDNN, 'CUDNN not available')
-    @skipIfRocm
     def test_cudnn_weight_format(self):
         rnns = [
             nn.LSTM(10, 20, batch_first=True),
@@ -8460,8 +8459,9 @@ tensor(..., device='meta', size=(1,), requires_grad=True)""")
                 with warnings.catch_warnings(record=True) as w:
                     output_noncontig = rnn(input, hx)
                 if first_warn:
-                    self.assertEqual(len(w), 1)
-                    self.assertIn('weights are not part of single contiguous chunk of memory', w[0].message.args[0])
+                    if (torch.version.hip is None):
+                        self.assertEqual(len(w), 1)
+                        self.assertIn('weights are not part of single contiguous chunk of memory', w[0].message.args[0])
                     first_warn = False
                     warnings.resetwarnings()
                 output_noncontig[0].sum().backward()

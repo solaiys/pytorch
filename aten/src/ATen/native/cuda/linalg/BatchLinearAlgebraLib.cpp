@@ -646,14 +646,31 @@ inline static void svd_cusolver_gesvd(const Tensor& A, const Tensor& U, const Te
   // We need to pass a copy of A, as it will be overwritten
   // gesvd just knows how to handle m >= n, so in the other case we need to transpose A
   const auto not_A_H = A.size(-2) >= A.size(-1);
+  Tensor Vcopy = V; // Shallow copy
+#ifdef ROCM_VERSION
+  // Similar to the case in svd_magma(), experiments have shown Vh tensor is
+  // not guaranteed to be column major on ROCM, we have to create a copy to
+  // deal with this
+  if (!not_A_H) {
+    Vcopy = at::empty_like(V.mT(),
+                           V.options()
+                           .device(V.device())
+                           .memory_format(at::MemoryFormat::Contiguous)).mT();
+  }
+#endif
   AT_DISPATCH_FLOATING_AND_COMPLEX_TYPES(A.scalar_type(), "svd_cuda_gesvd", [&] {
     apply_svd_cusolver_gesvd<scalar_t>(cloneBatchedColumnMajor(not_A_H ? A : A.mH()),
-                                       not_A_H ? U : V,
+                                       not_A_H ? U : Vcopy,
                                        S,
-                                       not_A_H ? V : U,
+                                       not_A_H ? Vcopy : U,
                                        infos,
                                        full_matrices, compute_uv, calculate_all_batches, batches);
   });
+#ifdef ROCM_VERSION
+  if (!not_A_H) {
+    V.copy_(Vcopy);
+  }
+#endif
 }
 
 // call cusolver gesvdj function to calculate svd
@@ -939,8 +956,13 @@ void svd_cusolver(const Tensor& A,
 
   static const char* check_svd_doc = "Check doc at https://pytorch.org/docs/stable/generated/torch.linalg.svd.html";
 
+#ifdef ROCM_VERSION
+  // ROCM only has gesvd implemented
+  const auto driver_v = c10::string_view("gesvd");
+#else
   // The default heuristic is to use gesvdj driver
   const auto driver_v = driver.value_or("gesvdj");
+#endif
 
   if (driver_v == "gesvd") {
     svd_cusolver_gesvd(A, U, S, V, info, full_matrices, compute_uv);

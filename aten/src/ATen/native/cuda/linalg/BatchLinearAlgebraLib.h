@@ -12,7 +12,7 @@
 #define USE_CUSOLVER
 #endif
 
-#if defined(USE_ROCM) && ROCM_VERSION >= 50200
+#if defined(USE_ROCM) && ROCM_VERSION >= 50300
 #define USE_HIPSOLVER
 #endif
 
