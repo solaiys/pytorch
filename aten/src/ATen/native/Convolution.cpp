@@ -232,22 +232,23 @@ auto ConvParams::use_mps( const at::Tensor& input, const at::Tensor& weight) con
 
 auto ConvParams::use_miopen(const at::Tensor& input, const at::Tensor& weight, bool bias_defined) const -> bool {
 
-  if (input.suggest_memory_format() == MemoryFormat::ChannelsLast || input.suggest_memory_format() == MemoryFormat::ChannelsLast3d)
-  {
-    return false;
-  }
+  return false;
+  // if (input.suggest_memory_format() == MemoryFormat::ChannelsLast || input.suggest_memory_format() == MemoryFormat::ChannelsLast3d)
+  // {
+  //   return false;
+  // }
   
-  if (needs_64bit_indexing_no_split(input, weight)) {
-    return false;
-  }
-  return ((input.scalar_type() == at::kFloat) || (input.scalar_type() == at::kHalf) || (input.scalar_type() == at::kBFloat16))
-         && detail::getCUDAHooks().compiledWithMIOpen()
-         && input.is_cuda()
-         && input.dim() <= MIOPEN_DIM_MAX
-         && !(groups > 1 && is_dilated()) // MIOpen currently does not support dilation with groups of size > 1
-         && !(input.scalar_type() == at::kBFloat16 && bias_defined) // MIOpen currently doesn't support bias with bfloat16
-         && cudnn_enabled
-         ;
+  // if (needs_64bit_indexing_no_split(input, weight)) {
+  //   return false;
+  // }
+  // return ((input.scalar_type() == at::kFloat) || (input.scalar_type() == at::kHalf) || (input.scalar_type() == at::kBFloat16))
+  //        && detail::getCUDAHooks().compiledWithMIOpen()
+  //        && input.is_cuda()
+  //        && input.dim() <= MIOPEN_DIM_MAX
+  //        && !(groups > 1 && is_dilated()) // MIOpen currently does not support dilation with groups of size > 1
+  //        && !(input.scalar_type() == at::kBFloat16 && bias_defined) // MIOpen currently doesn't support bias with bfloat16
+  //        && cudnn_enabled
+  //        ;
 }
 
 auto ConvParams::use_mkldnn(const at::Tensor& input, const at::Tensor& weight) const -> bool {
