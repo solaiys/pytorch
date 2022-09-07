@@ -6,7 +6,6 @@
 // TODO: Remove the condition on AT_ROCM_ENABLED entirely,
 // don't build this file as part of CPU build.
 #include <ATen/cuda/CUDAConfig.h>
-#include <iostream>
 
 #if !AT_ROCM_ENABLED()
 
@@ -780,7 +779,6 @@ Tensor miopen_convolution(
     IntArrayRef padding, IntArrayRef stride, IntArrayRef dilation,
     int64_t groups, bool benchmark, bool deterministic)
 {
-  std::cout << "miopen_convolution" << std::endl;
   // See [Note: hacky wrapper removal for optional tensor]
   c10::MaybeOwned<Tensor> bias_t_maybe_owned = at::borrow_from_optional_tensor(bias_t_opt);
   const Tensor& bias_t = *bias_t_maybe_owned;

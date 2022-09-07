@@ -14,7 +14,6 @@
 #include <c10/macros/Macros.h>
 
 #include <limits>
-#include <iostream>
 
 #if AT_NNPACK_ENABLED()
 #include <nnpack.h>
@@ -231,24 +230,17 @@ auto ConvParams::use_mps( const at::Tensor& input, const at::Tensor& weight) con
 }
 
 auto ConvParams::use_miopen(const at::Tensor& input, const at::Tensor& weight, bool bias_defined) const -> bool {
-
-  return false;
-  // if (input.suggest_memory_format() == MemoryFormat::ChannelsLast || input.suggest_memory_format() == MemoryFormat::ChannelsLast3d)
-  // {
-  //   return false;
-  // }
-  
-  // if (needs_64bit_indexing_no_split(input, weight)) {
-  //   return false;
-  // }
-  // return ((input.scalar_type() == at::kFloat) || (input.scalar_type() == at::kHalf) || (input.scalar_type() == at::kBFloat16))
-  //        && detail::getCUDAHooks().compiledWithMIOpen()
-  //        && input.is_cuda()
-  //        && input.dim() <= MIOPEN_DIM_MAX
-  //        && !(groups > 1 && is_dilated()) // MIOpen currently does not support dilation with groups of size > 1
-  //        && !(input.scalar_type() == at::kBFloat16 && bias_defined) // MIOpen currently doesn't support bias with bfloat16
-  //        && cudnn_enabled
-  //        ;
+  if (needs_64bit_indexing_no_split(input, weight)) {
+    return false;
+  }
+  return ((input.scalar_type() == at::kFloat) || (input.scalar_type() == at::kHalf) || (input.scalar_type() == at::kBFloat16))
+         && detail::getCUDAHooks().compiledWithMIOpen()
+         && input.is_cuda()
+         && input.dim() <= MIOPEN_DIM_MAX
+         && !(groups > 1 && is_dilated()) // MIOpen currently does not support dilation with groups of size > 1
+         && !(input.scalar_type() == at::kBFloat16 && bias_defined) // MIOpen currently doesn't support bias with bfloat16
+         && cudnn_enabled
+         ;
 }
 
 auto ConvParams::use_mkldnn(const at::Tensor& input, const at::Tensor& weight) const -> bool {
@@ -1051,7 +1043,6 @@ ConvBackend select_conv_backend(
     const Tensor& input_r, const Tensor& weight_r, const c10::optional<Tensor>& bias_opt,
     IntArrayRef stride_, IntArrayRef padding_, IntArrayRef dilation_,
     bool transposed_, IntArrayRef output_padding_, int64_t groups_) {
-  std::cout << "select_conv_backend" << std::endl;
   c10::MaybeOwned<Tensor> bias_maybe_owned = at::borrow_from_optional_tensor(bias_opt);
   const Tensor& bias = *bias_maybe_owned;
 
@@ -1096,7 +1087,6 @@ ConvBackend select_conv_backend(
     const at::OptionalIntArrayRef bias_sizes_opt,
     const bool need_backward,
     const ConvParams& params) {
-  std::cout << "select_conv_backend" << std::endl;
 
   // don't send empty inputs through backends
   if (input.size(0) == 0 || input.size(1) == 0) {
@@ -1290,7 +1280,6 @@ at::Tensor _convolution(
     IntArrayRef stride_, IntArrayRef padding_, IntArrayRef dilation_,
     bool transposed_, IntArrayRef output_padding_, int64_t groups_,
     bool benchmark, bool deterministic, bool cudnn_enabled, bool allow_tf32) {
-  std::cout << "_convolution" << std::endl;
   // See [Note: hacky wrapper removal for optional tensor]
   c10::MaybeOwned<Tensor> bias_r_maybe_owned = at::borrow_from_optional_tensor(bias_r_opt);
   const Tensor& bias_r = *bias_r_maybe_owned;
@@ -1494,6 +1483,18 @@ at::Tensor _convolution(
   if (k == 3 && !input.is_mkldnn()) {
     output = view3d(output);
   }
+
+#ifdef USE_ROCM
+  if (input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast3d) {
+    output = output.contiguous(at::MemoryFormat::ChannelsLast3d);
+  }
+  else if (input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast) {
+    output = output.contiguous(at::MemoryFormat::ChannelsLast);
+  } 
+  else if (input_r.suggest_memory_format() == at::MemoryFormat::Contiguous) {
+    output = output.contiguous(at::MemoryFormat::Contiguous);
+  }
+#endif
 
   return output;
 }
