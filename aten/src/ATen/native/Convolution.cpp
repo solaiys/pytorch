@@ -1485,14 +1485,18 @@ at::Tensor _convolution(
   }
 
 #ifdef USE_ROCM
-  if (input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast3d) {
-    output = output.contiguous(at::MemoryFormat::ChannelsLast3d);
-  }
-  else if (input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast) {
-    output = output.contiguous(at::MemoryFormat::ChannelsLast);
-  } 
-  else if (input_r.suggest_memory_format() == at::MemoryFormat::Contiguous) {
-    output = output.contiguous(at::MemoryFormat::Contiguous);
+  if (backend == ConvBackend::Miopen ||
+      backend == ConvBackend::MiopenDepthwise ||
+      backend == ConvBackend::MiopenTranspose) {
+    if (input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast3d) {
+      output = output.contiguous(at::MemoryFormat::ChannelsLast3d);
+    } else if (
+        input_r.suggest_memory_format() == at::MemoryFormat::ChannelsLast) {
+      output = output.contiguous(at::MemoryFormat::ChannelsLast);
+    } else if (
+        input_r.suggest_memory_format() == at::MemoryFormat::Contiguous) {
+      output = output.contiguous(at::MemoryFormat::Contiguous);
+    }
   }
 #endif
 
