@@ -13,6 +13,7 @@ from torch.testing._internal.common_utils import (
     suppress_warnings,
     TEST_WITH_ASAN,
     run_tests,
+    setLinalgBackendsToDefaultFinally,
 )
 from torch.testing._internal.common_device_type import (
     ops,
@@ -882,8 +883,10 @@ class TestMeta(TestCase):
     @onlyCUDA
     @skipIfCrossRef
     @suppress_warnings
+    @setLinalgBackendsToDefaultFinally
     @ops(op_db)
     def test_meta(self, device, dtype, op):
+        torch.backends.cuda.preferred_linalg_library('magma')
         # run the OpInfo sample inputs, cross-referencing them with the
         # meta implementation and check the results are the same.  All
         # the heavy lifting happens in MetaCrossRefFunctionMode
@@ -901,8 +904,10 @@ class TestMeta(TestCase):
     @onlyCUDA
     @skipIfCrossRef
     @suppress_warnings
+    @setLinalgBackendsToDefaultFinally
     @ops(op_db)
     def test_dispatch_meta(self, device, dtype, op):
+        torch.backends.cuda.preferred_linalg_library('magma')
         func = op.get_op()
         samples = op.sample_inputs(device, dtype, requires_grad=False)
         for sample_input in samples:
