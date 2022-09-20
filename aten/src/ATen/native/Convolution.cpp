@@ -1367,17 +1367,20 @@ at::Tensor _convolution(
       output = at::miopen_convolution(
           input.contiguous(backend_memory_format), weight, bias, params.padding, params.stride,
           params.dilation, params.groups, params.benchmark, params.deterministic);
+      output.contiguous(backend_memory_format)
       break;
     case ConvBackend::MiopenDepthwise:
       output = at::miopen_depthwise_convolution(
           input.contiguous(backend_memory_format), weight, bias, params.padding, params.stride,
           params.dilation, params.groups, params.benchmark, params.deterministic);
+      output.contiguous(backend_memory_format)
       break;
     case ConvBackend::MiopenTranspose:
       check_input_same_type_as_parameters(input, weight, bias);
       output = at::miopen_convolution_transpose(
           input.contiguous(backend_memory_format), weight, bias, params.padding, params.output_padding,
           params.stride, params.dilation, params.groups, params.benchmark, params.deterministic);
+      output.contiguous(backend_memory_format)
       break;
     case ConvBackend::Mkldnn:
 #if AT_MKLDNN_ENABLED()
@@ -1482,11 +1485,7 @@ at::Tensor _convolution(
     output = view3d(output);
   }
 
-#ifdef USE_ROCM
-  return output.contiguous(backend_memory_format);
-#else 
   return output;
-#endif
 }
 
 at::Tensor _convolution(
