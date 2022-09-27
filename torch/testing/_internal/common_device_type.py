@@ -922,23 +922,6 @@ class expectedFailure(object):
             return fn(slf, *args, **kwargs)
         return efail_fn
 
-class expectedSuccess(object):
-    def __init__(self, device_type):
-        self.device_type = device_type
-
-    def __call__(self, fn):
-
-        @wraps(fn)
-        def esuccess_fn(slf, *args, **kwargs):
-            if self.device_type is None or self.device_type == slf.device_type:
-                try:
-                    fn(slf, *args, **kwargs)
-                except Exception:
-                    slf.fail('expected test to succeed, but it failed with {}'.format(Exception))
-
-            return fn(slf, *args, **kwargs)
-        return esuccess_fn
-
 class onlyOn(object):
 
     def __init__(self, device_type):
@@ -1141,7 +1124,7 @@ def expectedFailureCUDAOnly(fn):
         return expectedFailure('cuda')(fn)
     else:
         # function is launched on rocm and expected to successed
-        return expectedSuccess('cuda')
+        return fn
 
 def expectedFailureCUDA(fn):
     return expectedFailure('cuda')(fn)
