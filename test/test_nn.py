@@ -11411,7 +11411,7 @@ tensor(..., device='meta', size=(1,), requires_grad=True)""")
         input = torch.randn((16, 8, 8, 8), dtype=torch.float16, device="cuda").to(memory_format=torch.channels_last)
         out_transpose = torch.convolution(input, weight, None, (1, 1), (1, 1), (1, 1), True, (0, 0), 4)
 
-    @unittest.expectedFailureCUDA
+    @unittest.expectedFailureCUDAOnly
     @unittest.skipIf(not TEST_CUDA, "CUDA unavailable")
     @unittest.skipIf(not TEST_CUDNN, "needs cudnn")
     def test_conv_cudnn_memory_layout_dominance(self):
