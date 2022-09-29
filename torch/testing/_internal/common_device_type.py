@@ -1121,10 +1121,10 @@ def disableMkldnn(fn):
 
 def expectedFailureCUDAOnly(fn):
     if torch.version.hip is not None:
-        return expectedFailure('cuda')(fn)
-    else:
-        # function is launched on rocm and expected to successed
+        # function is launched on rocm and expected to succeed
         return fn
+    else:
+        return expectedFailure('cuda')(fn)
 
 def expectedFailureCUDA(fn):
     return expectedFailure('cuda')(fn)
