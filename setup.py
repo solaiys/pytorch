@@ -942,13 +942,6 @@ def configure_extension_build():
 
     # These extensions are built by cmake and copied manually in build_extensions()
     # inside the build_ext implementation
-    if cmake_cache_vars['USE_ROCM']:
-        triton_req_file = os.path.join(cwd, ".github", "requirements", "triton-requirements-rocm.txt")
-        if os.path.exists(triton_req_file):
-            with open(triton_req_file) as f:
-                triton_req = f.read().strip()
-                extra_install_requires.append(triton_req)
-
     if cmake_cache_vars['BUILD_CAFFE2']:
         extensions.append(
             Extension(
@@ -1033,11 +1026,19 @@ def main():
         'opt-einsum': ['opt-einsum>=3.3']
     }
     if platform.system() == 'Linux':
-        triton_pin_file = os.path.join(cwd, ".github", "ci_commit_pins", "triton.txt")
+        cmake_cache_vars = get_cmake_cache_vars()
+        if cmake_cache_vars['USE_ROCM']:
+            triton_pin_filename = "triton-rocm.txt"
+            triton_pkg_name = "pytorch-triton"
+        else:
+            triton_pin_filename = "triton.txt"
+            triton_pkg_name = "pytorch-triton-rocm"  
+
+        triton_pin_file = os.path.join(cwd, ".github", "ci_commit_pins", triton_pin_filename)
         if os.path.exists(triton_pin_file):
             with open(triton_pin_file) as f:
                 triton_pin = f.read().strip()
-                extras_require['dynamo'] = ['pytorch-triton==2.0.0+' + triton_pin[:10], 'jinja2']
+                extras_require['dynamo'] = [triton_pkg_name+'==2.0.0+' + triton_pin[:10], 'jinja2']
 
     # Parse the command line and check the arguments before we proceed with
     # building deps and setup. We need to set values so `--help` works.
