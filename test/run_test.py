@@ -772,6 +772,12 @@ CUSTOM_HANDLERS = {
     "test_ops_gradients": run_test_ops,
     "test_ops_jit": run_test_ops,
     "functorch/test_ops": run_test_ops,
+    # TODO: Removing custom test handlers for all files below, failing locally
+    # https://ontrack-internal.amd.com/browse/SWDEV-383419
+    #"test_ops": run_test_ops,
+    #"test_ops_gradients": run_test_ops,
+    #"test_ops_jit": run_test_ops,
+    #"functorch/test_ops": run_test_ops,
 }
 
 
